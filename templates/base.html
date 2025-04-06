@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="{% if request.COOKIES.dark_mode == 'true' %}dark{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}صفحه اصلی | محمدجواد حیدرپناه{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: {
+                    sans: ['Vazirmatn', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#E5E7EB',
+                            200: '#D1D5DB',
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+
+        // تابع تغییر تم
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.contains('dark');
+            
+            // تغییر کلاس
+            html.classList.toggle('dark');
+            
+            // ذخیره ترجیح کاربر
+            document.cookie = `dark_mode=${!isDark}; path=/; max-age=31536000`;
+            
+            // به روزرسانی آیکون
+            updateThemeIcon(!isDark);
+        }
+        
+        // به روزرسانی آیکون
+        function updateThemeIcon(isDark) {
+            const icon = document.getElementById('theme-icon');
+            if (isDark) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                icon.classList.add('text-yellow-300');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                icon.classList.remove('text-yellow-300');
+            }
+        }
+        
+        // مقداردهی اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkMode = document.cookie.includes('dark_mode=true');
+            if (darkMode) {
+                document.documentElement.classList.add('dark');
+                updateThemeIcon(true);
+            }
+        });
+    </script>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-dark-900 dark:to-dark-800 min-h-screen font-sans text-gray-800 dark:text-dark-200 transition-colors duration-300">
+    <nav class="bg-white dark:bg-dark-800 shadow-md p-4 transition-colors duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
+                محمدجواد حیدرپناه
+            </a>
+            
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">خانه</a>
+                <a href="/projects/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">پروژه‌ها</a>
+                <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">تماس</a>
+                
+                <!-- دکمه تغییر تم بهبود یافته -->
+                <!--<button onclick="toggleTheme()" 
+                        class="p-2 rounded-full bg-gray-200 dark:bg-dark-700 text-gray-700 hover:bg-gray-300 dark:hover:bg-dark-600 transition-all duration-300 group">
+                    <i id="theme-icon" class="fas fa-moon group-hover:rotate-12 transition-transform duration-300"></i>
+                </button>--->
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- استایل‌های سفارشی -->
+    <style>
+        /* بهبود ظاهر اسکرول بار در دارک مود */
+        html.dark {
+            color-scheme: dark;
+        }
+        
+        /* انیمیشن نرم برای تغییر تم */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+</body>
+</html>

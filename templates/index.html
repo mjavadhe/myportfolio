@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <!-- بخش معرفی -->
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+            <h1 class="text-4xl font-bold mb-4">سلام، من محمدجواد حیدرپناه هستم</h1>
+            <h3 class="text-2xl text-blue-600 mb-2">
+                برنامه نویس پایتون و ادمین سیستم های لینوکسی در <br><a target="_blank" href="https://hpc.sharif.ir">  <img width="200" height="150" src="{% static 'images/hpc.png' %}"  alt="مرکز پردازش سریع دانشگاه شریف"></a>
+            </h3>
+            <p class="text-lg text-gray-600 mb-6">
+                مدیر سیستم | متخصص سیستم های لینوکسی | برنامه نویسی خودکار سازی با پایتون | طراح وب سایت با جنگو
+            </p>
+            
+            <!-- لینک‌های اجتماعی -->
+            <div class="flex space-x-4 rtl:space-x-reverse mb-8">
+                <a href="https://linkedin.com/in/mjavadhe" target="_blank" 
+                   class="text-2xl text-blue-600 hover:text-blue-800 transition-colors duration-300"
+                   title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/mjavadhe" target="_blank" 
+                   class="text-2xl text-gray-700 hover:text-gray-900 transition-colors duration-300"
+                   title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://instagram.com/mjavad.he" target="_blank" 
+                   class="text-2xl text-pink-600 hover:text-pink-800 transition-colors duration-300"
+                   title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://t.me/mjavad_he" target="_blank" 
+                   class="text-2xl text-blue-500 hover:text-blue-700 transition-colors duration-300"
+                   title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                
+                <a href="mailto:mjavad.heydarpanah@staff.sharif.edu" 
+                class="text-2xl text-red-500 hover:text-red-700 transition-colors duration-300"
+                title="Email">
+                 <i class="fas fa-envelope"></i>
+             </a>
+            </div>
+            
+            <!-- دکمه‌های اقدام -->
+            <div class="flex space-x-3 rtl:space-x-reverse">
+                <a href="/projects/" 
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors duration-300">
+                    مشاهده پروژه‌ها
+                </a>
+                <a href="#contact" 
+                   class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-md transition-colors duration-300">
+                    تماس با من
+                </a>
+            </div>
+        </div>
+        
+        <!-- عکس پروفایل -->
+        <div class="flex justify-center">
+            <img src="{% static 'images/profile.jpg' %}" 
+                 alt="عکس پروفایل [نام شما]" 
+                 class="rounded-full w-64 h-64 object-cover shadow-lg border-4 border-white">
+        </div>
+    </div>
+
+    <!-- بخش مهارت‌ها -->
+    <div class="mt-16">
+        <h2 class="text-3xl font-bold text-center mb-8">مهارت‌ها و تخصص‌ها</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <!-- مهارت ۱ - توسعه نرم‌افزار -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-blue-600 mb-4">
+                    <i class="fas fa-code text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">توسعه نرم افزار و اسکریپت نویسی</h3>
+                <p class="text-gray-600 mb-3">
+                    توسعه و ساخت برنامه و اسکریپت های خودکار سازی با پایتون
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">Python</span>
+                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-md text-xs">Automation</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-md text-xs">Scripting</span>
+                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded-md text-xs">CLI</span>
+                </div>
+            </div>
+
+            <!-- مهارت ۲ - توسعه بک‌اند -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-server text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">توسعه بک‌اند</h3>
+                <p class="text-gray-600 mb-3">
+                    تجربه در Django و طراحی API های RESTful
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-md text-xs">Django</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">REST API</span>
+                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-md text-xs">DRF</span>
+                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded-md text-xs">Authentication</span>
+                </div>
+            </div>
+
+            <!-- مهارت ۳ - پایگاه داده -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-purple-600 mb-4">
+                    <i class="fas fa-database text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">پایگاه داده</h3>
+                <p class="text-gray-600 mb-3">
+                    کار با PostgreSQL, Mysql و بهینه‌سازی کوئری‌ها
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-md text-xs">PostgreSQL</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">MySQL</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-md text-xs">Query Optimization</span>
+                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded-md text-xs">Indexing</span>
+                </div>
+            </div>
+
+            <!-- مهارت ۴ - مانیتورینگ -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-purple-600 mb-4">
+                    <i class="fas fa-chart-line text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">مانیتورینگ و نظارت</h3>
+                <p class="text-gray-600 mb-3">
+                    نصب، پیکربندی و مدیریت سیستم‌های مانیتورینگ پیشرفته
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-md text-xs">Zabbix</span>
+                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-md text-xs">Grafana</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">Prometheus</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-md text-xs">Alerting</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-amber-600 mb-4">
+                    <i class="fab fa-linux text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">مدیریت سرورهای لینوکسی</h3>
+                <p class="text-gray-600 mb-3">
+                    نصب، پیکربندی و مدیریت سرورهای لینوکسی
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-md text-xs">Ubuntu</span>
+                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded-md text-xs">CentOS</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">Bash</span>
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-md text-xs">SSH</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-orange-600 mb-4">
+                    <i class="fab fa-html5 text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">توسعه فرانت‌اند</h3>
+                <p class="text-gray-600 mb-3">
+                    طراحی رابط کاربری با HTML5 و CSS3
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-md text-xs">HTML5</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs">CSS3</span>
+                    <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-md text-xs">Tailwind</span>
+                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded-md text-xs">Responsive</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بخش پروژه‌های منتخب 
+    <div class="mt-16" id="projects">
+        <h2 class="text-3xl font-bold text-center mb-8">پروژه‌های منتخب</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for project in featured_projects %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
+                    <p class="text-gray-600 mb-4">{{ project.description|truncatechars:100 }}</p>
+                    <div class="flex space-x-3 rtl:space-x-reverse">
+                        {% if project.url %}
+                        <a href="{{ project.url }}" target="_blank" 
+                           class="text-blue-600 hover:text-blue-800 text-sm">
+                            <i class="fas fa-external-link-alt ml-1"></i> مشاهده
+                        </a>
+                        {% endif %}
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" 
+                           class="text-gray-600 hover:text-gray-800 text-sm">
+                            <i class="fab fa-github ml-1"></i> کد منبع
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-8">
+            <a href="/projects/" 
+               class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors duration-300">
+                مشاهده همه پروژه‌ها
+            </a>
+        </div>
+    </div> -->
+
+    <!-- بخش تماس -->
+    <div class="mt-16 bg-white rounded-lg shadow-md p-8" id="contact">
+        <h2 class="text-3xl font-bold text-center mb-8">تماس با من</h2>
+        
+        <!-- این div برای نمایش پیام موفقیت بعد از ارسال -->
+        <div id="form-success" class="hidden p-4 mb-6 bg-green-100 text-green-700 text-sm rounded-lg">
+            پیام شما با موفقیت ارسال شد!
+        </div>
+        
+        <!-- این div برای نمایش خطا -->
+        <div id="form-error" class="hidden p-4 mb-6 bg-red-100 text-red-700 text-sm rounded-lg">
+            مشکلی در ارسال پیام پیش آمد. لطفاً دوباره تلاش کنید.
+        </div>
+        
+        <form id="contact-form" action="https://formspree.io/f/xgvalaqo" method="POST" class="max-w-lg mx-auto">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 mb-2">نام شما</label>
+                <input type="text" id="name" name="name" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 mb-2">ایمیل</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="message" class="block text-gray-700 mb-2">پیام</label>
+                <textarea id="message" name="message" rows="4" required
+                          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <button type="submit" 
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors duration-300">
+                ارسال پیام
+            </button>
+        </form>
+    </div>
+    
+    <script>
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const successMessage = document.getElementById('form-success');
+        const errorMessage = document.getElementById('form-error');
+        
+        // تغییر وضعیت دکمه هنگام ارسال
+        submitButton.disabled = true;
+        submitButton.textContent = 'در حال ارسال...';
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // نمایش پیام موفقیت
+                successMessage.classList.remove('hidden');
+                errorMessage.classList.add('hidden');
+                form.reset();
+            } else {
+                throw new Error('خطا در ارسال فرم');
+            }
+        } catch (error) {
+            // نمایش پیام خطا
+            errorMessage.classList.remove('hidden');
+            successMessage.classList.add('hidden');
+            console.error('Error:', error);
+        } finally {
+            // بازگرداندن دکمه به حالت اولیه
+            submitButton.disabled = false;
+            submitButton.textContent = 'ارسال پیام';
+        }
+    });
+    </script>
+</div>
+{% endblock %}

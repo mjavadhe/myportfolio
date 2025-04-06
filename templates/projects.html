@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}پروژه‌های من | نام شما{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4">پروژه‌های من</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">نمونه کارها و پروژه‌های انجام شده توسط من</p>
+    </div>
+
+    <!-- لیست پروژه‌ها -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for project in projects %}
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+            <!-- تصویر پروژه -->
+            <div class="relative h-48 overflow-hidden">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" 
+                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                {% if project.is_featured %}
+                <span class="absolute top-3 left-3 bg-yellow-400 text-yellow-900 px-2 py-1 rounded-md text-xs font-bold">
+                    ویژه
+                </span>
+                {% endif %}
+            </div>
+
+            <!-- محتوای پروژه -->
+            <div class="p-6 flex flex-col flex-grow">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-xl font-bold text-gray-800">{{ project.title }}</h3>
+                    <span class="text-sm text-gray-500">{{ project.date_created|date:"Y/m/d" }}</span>
+                </div>
+
+                <!-- توضیحات با محدودیت 3 خط -->
+                <div class="mb-4 flex-grow">
+                    <p class="text-gray-600 line-clamp-3">{{ project.description }}</p>
+                </div>
+
+                <!-- تکنولوژی‌های استفاده شده -->
+                {% if project.technologies or project.technologies2 or project.technologies3 or project.technologies4 %}
+                <div class="mb-4">
+                    <div class="flex flex-wrap gap-2">
+                        {% if project.technologies %}
+                            {% for tech in project.technologies.split|slice:":3" %}
+                            <span class="text-xs bg-gray-100 text-gray-800 rounded-full px-3 py-1">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {% if project.technologies2 %}
+                            {% for tech in project.technologies2.split|slice:":3" %}
+                            <span class="text-xs bg-gray-100 text-gray-800 rounded-full px-3 py-1">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {% if project.technologies3 %}
+                            {% for tech in project.technologies3.split|slice:":3" %}
+                            <span class="text-xs bg-gray-100 text-gray-800 rounded-full px-3 py-1">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {% if project.technologies4 %}
+                            {% for tech in project.technologies4.split|slice:":3" %}
+                            <span class="text-xs bg-gray-100 text-gray-800 rounded-full px-3 py-1">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- دکمه‌های عمل -->
+                <div class="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto">
+                    <!-- دکمه جزئیات پروژه -->
+                    <a href="{% url 'project_detail' project.id %}" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center transition-colors duration-300">
+                        <span>جزئیات پروژه</span>
+                        <i class="fas fa-arrow-left mr-2"></i>
+                    </a>
+
+                    <!-- دکمه گیت‌هاب با استایل جدید -->
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" 
+                       class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-md flex items-center transition-colors duration-300">
+                        <i class="fab fa-github ml-2"></i>
+                        <span>مشاهده منبع</span>
+                    </a>
+                {% else %}
+                    <span class="bg-gray-300 text-gray-600 px-4 py-2 rounded-md flex items-center cursor-not-allowed">
+                        <i class="fas fa-ban ml-2"></i>
+                        <span>منبع موجود نیست</span>
+                    </span>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center py-12">
+            <i class="fas fa-folder-open text-4xl text-gray-300 mb-4"></i>
+            <p class="text-gray-500">هنوز پروژه‌ای ثبت نشده است.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- صفحه‌بندی -->
+    {% if is_paginated %}
+    <div class="mt-12 flex justify-center">
+        <nav class="flex items-center space-x-2 rtl:space-x-reverse">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" 
+               class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-colors duration-300">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <span class="px-4 py-2 rounded-md bg-blue-600 text-white">{{ num }}</span>
+            {% else %}
+            <a href="?page={{ num }}" class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-colors duration-300">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" 
+               class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-colors duration-300">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    /* برای محدود کردن توضیحات به 3 خط */
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+{% endblock %}

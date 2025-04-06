@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} | جزئیات پروژه{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-5xl mx-auto">
+        <!-- دکمه بازگشت -->
+        <a href="{% url 'projects' %}" class="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6 transition-colors duration-300">
+            <i class="fas fa-arrow-right ml-2"></i>
+            <span>بازگشت به لیست پروژه‌ها</span>
+        </a>
+        
+        <!-- کارت اصلی پروژه -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- تصویر پروژه -->
+            <div class="relative h-96 overflow-hidden">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" 
+                     class="w-full h-full object-cover object-center">
+                {% if project.is_featured %}
+                <span class="absolute top-4 left-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-md text-sm font-bold">
+                    پروژه ویژه
+                </span>
+                {% endif %}
+            </div>
+
+            <!-- محتوای پروژه -->
+            <div class="p-8">
+                <!-- عنوان و تاریخ -->
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
+                    <h1 class="text-3xl font-bold text-gray-800">{{ project.title }}</h1>
+                    <div class="flex items-center text-gray-500 mt-2 md:mt-0">
+                        <i class="far fa-calendar-alt ml-2"></i>
+                        <span>تاریخ ایجاد: {{ project.date_created|date:"Y/m/d" }}</span>
+                    </div>
+                </div>
+
+                <!-- تکنولوژی‌ها -->
+                {% if project.technologies or project.technologies2 or project.technologies3 or project.technologies4 %}
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">تکنولوژی‌های استفاده شده:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {% if project.technologies %}
+                            {% for tech in project.technologies.split %}
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {% if project.technologies2 %}
+                            {% for tech in project.technologies2.split %}
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {% if project.technologies3 %}
+                            {% for tech in project.technologies3.split %}
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {% if project.technologies4 %}
+                            {% for tech in project.technologies4.split %}
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">{{ tech }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- توضیحات کامل -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">توضیحات پروژه:</h3>
+                    <div class="whitespace-pre-line text-gray-600 leading-relaxed text-justify">
+                        {{ project.description|linebreaksbr }}
+                    </div>
+                </div>
+
+                <!-- گالری تصاویر (اختیاری) -->
+                {% if project.images.all %}
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">تصاویر پروژه:</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {% for image in project.images.all %}
+                        <a href="{{ image.image.url }}" data-lightbox="project-gallery" class="block">
+                            <img src="{{ image.image.url }}" alt="تصویر پروژه {{ forloop.counter }}" 
+                                 class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity">
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- دکمه‌های عمل -->
+                <div class="flex flex-wrap gap-4 pt-6 border-t border-gray-200">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" 
+                       class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-md flex items-center transition-colors duration-300">
+                        <i class="fab fa-github ml-2"></i>
+                        <span>مشاهده منبع</span>
+                    </a>
+                {% else %}
+                    <span class="bg-gray-300 text-gray-600 px-4 py-2 rounded-md flex items-center cursor-not-allowed">
+                        <i class="fas fa-ban ml-2"></i>
+                        <span>این پروژه به درخواست شخص یا شرکتی درست شده و مجوز انتشار به صورت متن باز داده نشده.</span>
+                    </span>
+                {% endif %}
+
+                    {% if project.url %}
+                    <a href="{{ project.url }}" target="_blank" 
+                       class="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-external-link-alt ml-2 text-lg"></i>
+                        <span>مشاهده پروژه زنده</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- استایل‌های سفارشی -->
+<style>
+    .whitespace-pre-line {
+        white-space: pre-line;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+</style>
+{% endblock %}
